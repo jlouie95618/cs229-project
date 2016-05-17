@@ -19,7 +19,7 @@ Machine learning project to attempt to predict Medicare costs based on non-tradi
 * Part D
     - prescription drug coverage insurance that is provided by private companies approved by Medicare
 
-### Notes on Data Files:
+# Notes on Data Files:
 
 ## Medicare Spending
 
@@ -32,3 +32,7 @@ Machine learning project to attempt to predict Medicare costs based on non-tradi
 ## Chronically Ill Patient Care
 
 ## Patient Post Discharge Events
+
+# Misc Notes:
+
+We'll have to stratify by either HSA, HRR, county or state. The learning granularity has to be consistent so we can really only predict on one of the four categories. The thing is, certain factors/features only are applicable at a certain granularity level; this needs to be accounted for.
