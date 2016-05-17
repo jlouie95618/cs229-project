@@ -47,21 +47,89 @@ Our `y` values:
     - `Total Medicare reimbursements per enrollee (Parts A and B) (2011): Price, age, sex & race-adjusted`
 
 For our feature vectors `x`:
-- 2011_phys_hrr:
-    1. 
+- HRR Details:
+    HRR_ID
+    HRR_Name
+    State
+- 2011_phys_hrr: 42 Total
+    `Resident Population (2010)`
+    `Total Physicians per 100,000 Residents (2011)`
+    `Primary Care Physicians per 100,000 Residents (2011)`
+    `Total Specialists per 100,000 Residents (2011)`
+    `Medical Specialists per 100,000 Residents (2011)`
+    `Hospital-Based Physicians per 100,000 Residents (2011)`
+    `Surgeons per 100,000 Residents (2011)`
+    `Resident Physicians per 100,000 Residents (2011)`
+    `Allergists/ Immunologists per 100,000 Residents (2011)`
+    `Anesthesiologists per 100,000 Residents (2011)`
+    `Cardiologists per 100,000 Residents (2011)`
+    `Cardiovascular/ Thoracic Surgeons per 100,000 Residents (2011)`
+    `Critical Care Physicians per 100,000 Residents (2011)`
+    `Dermatologists per 100,000 Residents (2011)`
+    `Emergency Medicine Physicians per 100,000 Residents (2011)`
+    `Endocrinologists per 100,000 Residents (2011)`
+    `Family Practice Physicians per 100,000 Residents (2011)`
+    `Geriatricians per 100,000 Residents (2011)`
+    `General Surgeons per 100,000 Residents (2011)`
+    `Gastroenterologists per 100,000 Residents (2011)`
+    `Hematologists/ Oncologists per 100,000 Residents (2011)`
+    `Infectious Disease Specialists per 100,000 Residents (2011)`
+    `Internal Medicine Physicians per 100,000 Residents (2011)`
+    `Neonatologists per 100,000 Residents (2011)`
+    `Nephrologists per 100,000 Residents (2011)`
+    `Neurosurgeons per 100,000 Residents (2011)`
+    `Neurologists per 100,000 Residents (2011)`
+    `Obstetrician/ Gynecologists per 100,000 Women Age 15-44 (2011)`
+    `Ophthalmologists per 100,000 Residents (2011)`
+    `Orthopedic Surgeons per 100,000 Residents (2011)`
+    `Otolaryngologists per 100,000 Residents (2011)`
+    `Pathologists per 100,000 Residents (2011)`
+    `Pediatricians per 100,000 Residents (2011)`
+    `Plastic & Reconstructive Surgeons per 100,000 Residents (2011)`
+    `Psychiatrists per 100,000 Residents (2011)`
+    `Pulmonologists per 100,000 Residents (2011)`
+    `Radiologists per 100,000 Residents (2011)`
+    `Radiation Oncologists per 100,000 Residents (2011)`
+    `Physical Medicine/ Rehabilitation Physicians per 100,000 Residents (2011)`
+    `Rheumatologists per 100,000 Residents (2011)`
+    `Urologists per 100,000 Residents (2011)`
+    `Vascular Surgeons per 100,000 Residents (2011)`
+- PC_HRR_rates_2011: 11 Total
+    `Number of Medicare beneficiaries (Part B eligible (2011):Overall`
+    `Average annual percent of Medicare enrollees having at least one ambulatory visit to a primary care clinician (2011):Overall:Rate`
+    `Number of diabetic Medicare enrollees age 65-75 (2011):Overall`
+    `Average annual percent of diabetic Medicare enrollees age 65-75 having hemoglobin A1c test (2011):Overall:Rate`
+    `Average annual percent of diabetic Medicare enrollees age 65-75 having eye examination (2011):Overall:Rate`
+    `Average annual percent of diabetic Medicare enrollees age 65-75 having blood lipids (LDL-C) test (2011):Overall:Rate`
+    `Number of female Medicare enrollees age 67-69 (2011):Overall`
+    `Average percent of female Medicare enrollees age 67-69 having at least one mammogram over a two-year period (2011):Overall:Rate`
+    `Number of Medicare beneficiaries (Part A eligible) (2011):Overall`
+    `Leg amputations per 1,000 Medicare enrollees (2011):Overall:Rate`
+    `Discharges for ambulatory care sensitive conditions per 1,000 Medicare enrollees (2011):Overall:Rate`
+- post_discharge_events_hrr_11: 24 Total
+    `Number of patients in medical cohort (2011)`
+    `Medical:Percent readmitted within 30 days of discharge (2011):Rate`
+    `Medical:Percent seeing a primary care clinician within 14 days of discharge to home (2011):Rate`
+    `Medical:Percent having an ambulatory visit within 14 days of discharge to home (2011):Rate`
+    `Medical:Percent having an emergency room visit within 30 days of discharge (2011):Rate`
+    `Number of patients in surgical cohort (2011)`
+    `Surgical:Percent readmitted within 30 days of discharge (2011):Rate`
+    `Surgical:Percent seeing a primary care clinician within 14 days of discharge to home (2011):Rate`
+    `Surgical:Percent having an emergency room visit within 30 days of discharge (2011):Rate`
+    `Number of patients in CHF cohort (2011)`
+    `CHF:Percent readmitted within 30 days of discharge (2011):Rate`
+    `CHF:Percent seeing a primary care clinician within 14 days of discharge to home (2011):Rate`
+    `CHF:Percent having an ambulatory visit within 14 days of discharge to home (2011):Rate`
+    `CHF:Percent having an emergency room visit within 30 days of discharge (2011):Rate`
+    `Number of patients in AMI cohort (2011)`
+    `AMI:Percent readmitted within 30 days of discharge (2011):Rate`
+    `AMI:Percent seeing a primary care clinician within 14 days of discharge to home (2011):Rate`
+    `AMI:Percent having an ambulatory visit within 14 days of discharge to home (2011):Rate`
+    `AMI:Percent having an emergency room visit within 30 days of discharge (2011):Rate`
+    `Number of patients in pneumonia cohort (2011)`
+    `Pneumonia:Percent readmitted within 30 days of discharge (2011):Rate`
+    `Pneumonia:Percent seeing a primary care clinician within 14 days of discharge to home (2011):Rate`
+    `Pneumonia:Percent having an ambulatory visit within 14 days of discharge to home (2011):Rate`
+    `Pneumonia:Percent having an emergency room visit within 30 days of discharge (2011):Rate`
 - DAP_hrr_data_2011:
-    1. 
-- PC_HRR_rates_2011:
-    1. `Number of Medicare beneficiaries (Part B eligible (2011): Overall`
-    2. `Average annual percent of Medicare enrollees having at least one ambulatory visit to a primary care clinician (2011): Overall: Rate`
-    3. `Number of diabetic Medicare enrollees age 65-75 (2011): Overall`
-    4. `Average annual percent of diabetic Medicare enrollees age 65-75 having hemoglobin A1c test (2011): Overall: Rate`
-    5. `Average annual percent of diabetic Medicare enrollees age 65-75 having eye examination (2011): Overall: Rate`
-    6. `Average annual percent of diabetic Medicare enrollees age 65-75 having blood lipids (LDL-C) test (2011): Overall: Rate`
-    7. `Number of female Medicare enrollees age 67-69 (2011): Overall`
-    8. `Average percent of female Medicare enrollees age 67-69 having at least one mammogram over a two-year period (2011): Overall: Rate`
-    9. `Number of Medicare beneficiaries (Part A eligible) (2011): Overall`
-    10. `Leg amputations per 1,000 Medicare enrollees (2011): Overall: Rate`
-     `Discharges for ambulatory care sensitive conditions per 1,000 Medicare enrollees (2011): Overall: Rate`
-- post_discharge_events_hrr_11:
-    1.  
+    
