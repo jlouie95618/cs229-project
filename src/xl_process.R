@@ -1,6 +1,7 @@
 library(MASS)
 library(XLConnect)
 
+options(stringsAsFactors = FALSE)
 path <- "/Users/awells/Desktop/Senior_Year/SPRING_QUARTER/cs229/final_project/cs229-project/data/hrr_level_data/"
 hrr_filenames <- c("post_discharge_events_hrr_11.xls","PC_HRR_rates_2011.xls","pa_reimb_hrr_2011.xls","DAP_hrr_data_2011.xls","2011_phys_hrr.xls")
 all_files <- list()
@@ -80,3 +81,9 @@ wb_out <- loadWorkbook("hrr_data_total.xls",create = TRUE)
 createSheet(wb_out,"hrr_dat")
 writeWorksheet(wb_out,total_df,"hrr_dat")
 saveWorkbook(wb_out)
+
+for(i in 1:length(total_df[1,])){
+  total_df[,i] <- as.numeric(as.character(total_df[,i]))  
+}
+write.table(total_df,file = "tab_hrr.txt", sep = '\t')
+
