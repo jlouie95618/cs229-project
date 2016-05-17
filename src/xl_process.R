@@ -1,7 +1,6 @@
 library(MASS)
 library(XLConnect)
 
-options(stringsAsFactors = FALSE)
 path <- "/Users/awells/Desktop/Senior_Year/SPRING_QUARTER/cs229/final_project/cs229-project/data/hrr_level_data/"
 hrr_filenames <- c("post_discharge_events_hrr_11.xls","PC_HRR_rates_2011.xls","pa_reimb_hrr_2011.xls","DAP_hrr_data_2011.xls","2011_phys_hrr.xls")
 all_files <- list()
