@@ -38,6 +38,20 @@ Machine learning project to attempt to predict Medicare costs based on non-tradi
 We'll have to stratify by either HSA, HRR, county or state. The learning granularity has to be consistent so we can really only predict on one of the four categories. The thing is, certain factors/features only are applicable at a certain granularity level; this needs to be accounted for.
 
 
+## TO DO LIST:
+
+- Feature Selection:
+    * Normalization
+    * Regularization
+    * PCA
+    * Perform Mutual Information on the features
+- Learning Algorithms to Try:
+    * K-means clustering
+    * Linear regression
+    * SVM
+    * GDA - Hospital Level; NOT HRR
+    * 
+
 ### Preliminary Features:
 
 ## 2011:

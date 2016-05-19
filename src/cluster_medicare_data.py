@@ -3,20 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-from sklearn import datasets
-
-# def read_file():
-#     with open(filename) as f:
-#         for line in f:
-
-
 def main(args):
     print args
     if len(args) < 1: return
     X = np.genfromtxt(args[0], delimiter=',')
     print X 
-    for x in X:
-        if np.isnan(np.sum(x)): print x
+    X = X[:, 1:]
+    # for x in X:
+    #     if np.isnan(np.sum(x)): print x
     # y = np.loadtxt(args[1])
     estimators = {'k_means_3': KMeans(n_clusters=3),
                     'k_means_4': KMeans(n_clusters=4),
