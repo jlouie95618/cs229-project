@@ -81,8 +81,9 @@ createSheet(wb_out,"hrr_dat")
 writeWorksheet(wb_out,total_df,"hrr_dat")
 saveWorkbook(wb_out)
 
-for(i in 1:length(total_df[1,])){
-  total_df[,i] <- as.numeric(as.character(total_df[,i]))  
-}
-write.table(total_df,file = "tab_hrr.txt", sep = '\t')
+wb_labels <- loadWorkbook('hrr_data_labels.xls',create =TRUE)
+createSheet(wb_labels,'hrr_labels')
+writeWorksheet(wb_labels,r_df,'hrr_labels')
+saveWorkbook(wb_labels)
+
 
