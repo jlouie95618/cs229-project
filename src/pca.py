@@ -11,11 +11,7 @@ def main(args):
     if (len(args) < 1): return
     X = np.genfromtxt(args[0], delimiter=',')
     print X
-    X = normalize(X[:, 1:])
-    print X
-    temp = deepcopy(X[:, 1])
-    X[:, 1] = deepcopy(X[:, 3])
-    X[:, 3] = temp
+    X = normalize(X[:, 2:])
     print X
     X.transpose()
     pca = PCA()
