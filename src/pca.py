@@ -11,8 +11,6 @@ def main(args):
     if (len(args) < 1): return
     X = np.genfromtxt(args[0], delimiter=',')
     print X
-    X = normalize(X[:, 2:])
-    print X
     X.transpose()
     pca = PCA()
     pca.fit(X)

@@ -101,13 +101,17 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
 
 def main(args):
     print args
-    training_example_ids = read_data_file(path_to_files + 'Hospital General Information.csv', 1, (0, 1))
-    training_example_ids = training_example_ids[:, 0]
+    y_labels = read_data_file(path_to_files + 'Medicare Hospital Spending per Patient - Hospital.csv', 1, (0, 10))
+    y_labels = y_labels[y_labels[:,0].argsort()]
+    y_labels = y_labels[y_labels[:, 1] != 'Not Available']
+    training_example_ids = y_labels[:, 0]
     for i, val in enumerate(training_example_ids):
         training_example_ids[i] = val.strip('"')
-    print len(training_example_ids)
+    y_labels = y_labels[:, 1]
+    print len(y_labels)
     measure_ids = set()
     dataset_map = initialize_map(training_example_ids)
+    print y_labels
     print training_example_ids
     
     read_data_file(path_to_files + 'Complications - Hospital.csv', 1, (0, 9, 12), dataset_map, measure_ids)
@@ -127,10 +131,12 @@ def main(args):
     np.savetxt('training_set.txt', X, fmt='%s', delimiter=';')
     np.savetxt('feature_labels.txt', measure_ids, fmt='%s', delimiter=';')
     np.savetxt('hospital_ids.txt', training_example_ids, fmt='%s', delimiter=';')
+    np.savetxt('labels.txt', y_labels, fmt='%s', delimiter=';')
 
     np.savetxt('training_set.csv', X, fmt='%s', delimiter=',')
     np.savetxt('feature_labels.csv', measure_ids, fmt='%s', delimiter=',')
     np.savetxt('hospital_ids.csv', training_example_ids, fmt='%s', delimiter=',')
+    np.savetxt('labels.csv', y_labels, fmt='%s', delimiter=',')
 
 if __name__ == '__main__':
     main(sys.argv[1:])
