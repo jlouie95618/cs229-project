@@ -7,8 +7,9 @@ def main(args):
     print args
     if len(args) < 1: return
     X = np.genfromtxt(args[0], delimiter=',')
+    X[np.isnan(X)] = -1
     print X 
-    X = X[:, 1:]
+
     # for x in X:
     #     if np.isnan(np.sum(x)): print x
     # y = np.loadtxt(args[1])

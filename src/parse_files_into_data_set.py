@@ -13,7 +13,21 @@ import numpy as np
 # 6 Outpatient Imaging Efficiency DONE!!!
 # 7 Readmission and Deaths DONE!!!
 # 8 HCAPHS SKIP!!!
-# 9 READMISSION REDUCTION
+# 9 READMISSION REDUCTION DONE!!!
+
+# CATEGORICAL VARIABLES TO ACCOMODATE:
+# ALL "Not avaialble" should be converted to the EMPTY STRING
+#   - To be filled in with clustering later
+# Measure Response
+#   - "Does not have ..." should be converted to 0
+#   - "No" or "N" should be converted to 0
+#   - "Yes" or "Y" should be converted to 1
+# EDV in Timely and Effective Care
+#   - "Very High" --> 70000
+#   - "High" --> 50000
+#   - "Medium" --> 30000
+#   - "Low" --> 10000
+
 
 # Training Example Labels: 
 # Hospital General Information.csv
@@ -53,10 +67,35 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
             hospital = dataset_map[e_id]
             if m_id in hospital:
                 val = hospital[m_id]
+                if m_id == 'EDV':
+                    if '60,000' in val: # Very High
+                        val = '70000'
+                    elif '40,000' in val: # High
+                        val = '50000'
+                    elif '20,000' in val: # Medium
+                        val = '30000'
+                    elif '19,999' in val: # Low
+                        val = '10000'
+                elif m_id == 'OP_12' or \
+                    m_id == 'OP_17' or \
+                    m_id == 'OP_25':
+                    if val == "Yes":
+                        val = '1'
+                    else:
+                        val = '0'
+                elif m_id == 'SM_PART_CARD' or \
+                    m_id == 'SM_PART_GEN_SURG' or \
+                    m_id == 'SM_PART_NURSE' or \
+                    m_id == 'SM_SS_CHECK' or \
+                    m_id == 'ACS_REGISTRY':
+                    if val == 'Y':
+                        val = '1'
+                    else:
+                        val = '0'
                 if val == 'Not Available':
-                    val = ''
+                    val = '-1'
             else:
-                val = ''
+                val = '-1'
             X[i, j] = val
     return X
 
@@ -88,6 +127,10 @@ def main(args):
     np.savetxt('training_set.txt', X, fmt='%s', delimiter=';')
     np.savetxt('feature_labels.txt', measure_ids, fmt='%s', delimiter=';')
     np.savetxt('hospital_ids.txt', training_example_ids, fmt='%s', delimiter=';')
+
+    np.savetxt('training_set.csv', X, fmt='%s', delimiter=',')
+    np.savetxt('feature_labels.csv', measure_ids, fmt='%s', delimiter=',')
+    np.savetxt('hospital_ids.csv', training_example_ids, fmt='%s', delimiter=',')
 
 if __name__ == '__main__':
     main(sys.argv[1:])
