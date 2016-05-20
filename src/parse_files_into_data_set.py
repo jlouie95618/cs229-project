@@ -101,6 +101,8 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
 
 def main(args):
     print args
+    if len(args) < 1: return
+    threshold = float(args[0])
     y_labels = read_data_file(path_to_files + 'Medicare Hospital Spending per Patient - Hospital.csv', 1, (0, 10))
     y_labels = y_labels[y_labels[:,0].argsort()]
     y_labels = y_labels[y_labels[:, 1] != 'Not Available']
@@ -126,7 +128,21 @@ def main(args):
     print measure_ids
     print len(measure_ids)
     X = assemble_matrix(dataset_map, training_example_ids, measure_ids)
-    print X    
+    print X
+
+    rows_to_delete = []
+    for i in xrange(0, len(X)):
+        neg_one_count = 0
+        for j in xrange(0, len(X[0])):
+            if X[i, j] == '-1': neg_one_count += 1
+        if (float(neg_one_count) / float(len(measure_ids))) > threshold:
+            rows_to_delete.append(i)
+    print 'before: %d' % len(y_labels)
+    print rows_to_delete
+    X = np.delete(X, rows_to_delete, 0)
+    y_labels = np.delete(y_labels, rows_to_delete, 0)
+    training_example_ids = np.delete(training_example_ids, rows_to_delete, 0)
+    print 'after: %d' % len(y_labels)
     # save all data to the appropriate files
     np.savetxt('training_set.txt', X, fmt='%s', delimiter=';')
     np.savetxt('feature_labels.txt', measure_ids, fmt='%s', delimiter=';')
