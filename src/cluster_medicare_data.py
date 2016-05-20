@@ -7,7 +7,6 @@ def main(args):
     print args
     if len(args) < 1: return
     X = np.genfromtxt(args[0], delimiter=',')
-    X[np.isnan(X)] = -1
     print X 
 
     # for x in X:

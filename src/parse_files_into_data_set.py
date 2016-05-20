@@ -92,7 +92,7 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
                         val = '1'
                     else:
                         val = '0'
-                if val == 'Not Available':
+                if 'Not Available' in val:
                     val = '-1'
             else:
                 val = '-1'
@@ -122,7 +122,7 @@ def main(args):
     print measure_ids
     print len(measure_ids)
     X = assemble_matrix(dataset_map, training_example_ids, measure_ids)
-    print X
+    print X    
     # save all data to the appropriate files
     np.savetxt('training_set.txt', X, fmt='%s', delimiter=';')
     np.savetxt('feature_labels.txt', measure_ids, fmt='%s', delimiter=';')
