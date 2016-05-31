@@ -13,7 +13,11 @@ def main(args):
 		exit(0)
 	X = np.genfromtxt(args[0], delimiter=',')
 	Y = np.genfromtxt(args[1], delimiter=',')
+	#Y = util.parse_Y(args[1])
+	X = util.process_X(X)
 	X = util.fill_mean(X)
+	print(X)
+	print(Y)
 	X = preprocessing.normalize(X)
 	cutoff = int(len(X)*.7)
 	x_train, y_train = X[:cutoff], Y[:cutoff]
@@ -31,11 +35,6 @@ def main(args):
 	print('explained variance score: %.8f' %explained_variance_score(y_test,pred))
 
 	return
-
-
-
-
-
 
 
 

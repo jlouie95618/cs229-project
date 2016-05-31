@@ -29,7 +29,6 @@ def process_X(X):
 	Use only for 'old' dataset
 	'''
 	X_new = np.delete(X,0,1)
-	X_new = np.delete(X_new,0,1)
 	return X_new 
 
 
@@ -44,7 +43,7 @@ def fill_mean(features):
 	'''
 	averages = np.empty((0))
 	for i,feature in enumerate(features.T):
-		observed = np.asarray([f for f in feature if f!=-1])
+		observed = np.asarray([f for f in feature if f!=-1 and math.isnan(f)==False])
 		if(len(observed)==0):
 			averages = np.append(averages,0)
 			continue
@@ -54,10 +53,11 @@ def fill_mean(features):
 	
 	for j,feature in enumerate(features):
 		for k,f in enumerate(feature):
-			if f==-1:
+			if f==-1 or math.isnan(f)==True:
 				feature[k] = averages[k]
 
 	#np.savetxt('temp.csv',features,fmt='%f',delimiter=',')
+
 	return features
 
 

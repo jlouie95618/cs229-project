@@ -1,0 +1,40 @@
+Provider ID
+Number of deaths among chronically ill patients assigned to hospital
+Percent of enrollees' medical inpatient days at hospital to which they were assigned
+Hospital care intensity index (standardized ratio of inpatient days and inpatient visits)
+Physician visits per decedent
+Payments per physician visit
+Physician visit payments
+Physician visits
+Payments per visit
+Hospital beds
+Total intensive care beds
+High-intensity beds
+Intermediate intensity beds
+Medical and surgical beds
+SNF beds
+Standardized FTE Physician Labor total
+Medical Specialist
+Primary Care
+Ratio MS/PC
+RNs required under proposed federal standards
+Hospital days per decedent
+Total intensive care days per decedent
+High-intensity intensive care days per decedent
+intermeidate intensive care days per decedent
+Medical and Surgical Unit days per decedent
+SNF days per decedent
+Total physician visits per decedent
+Medical specialist visits per decedent
+Primary care visits per decedent
+Ratio MS/PC (2)
+Home health agency visits per decedent
+Percent of deaths occuring in hospital
+Percent of deaths that included an ICU admission
+Percent enrolled in hospice
+Hospice days per decedent
+Percent of patient seeing 10 or more different physicians
+Number of different physicians seen per decedent
+Average co-payments per decedent in last two years of life
+Physician services
+Durable medical equipment

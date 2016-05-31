@@ -1,30 +1,85 @@
 import sys
 import numpy as np
-import matplotlib.pyplot as plt
 import util
+from sklearn.svm import LinearSVC
+from sklearn.svm import SVR
+from sklearn.feature_selection import SelectFromModel
+from sklearn import linear_model
+from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.metrics import explained_variance_score
 from sklearn.metrics import r2_score
+from sklearn.linear_model import LogisticRegression
 from sklearn import ensemble
 from sklearn import datasets
 from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
 
 
 def main(args):
-	if(len(args)<2):
-		print("USAGE: python gradient_boosting.py [training features] [training labels]")
-	X = np.genfromtxt(args[0], delimiter=',')
-	#Y = np.genfromtxt(args[1], delimiter=',')
-	Y = util.parse_Y(args[1])
+	X = np.genfromtxt(args[0], delimiter = ',')
+	y = np.genfromtxt(args[1], delimiter = ',')
+	#y = util.parse_Y(args[1])
+
 	X = util.process_X(X)
 	X = util.fill_mean(X)
-	X = preprocessing.normalize(X)
+	X = preprocessing.scale(X)
+	lvsc = LogisticRegression(C=0.1,dual=False).fit(X,y)
+	model = SelectFromModel(lvsc,prefit=True)
+	X_new = model.transform(X)
+
+	linear_regression(X_new,y)
+	svm(X_new,y)
+	boosting(X_new,y)
+
+	return
+
+
+def linear_regression(X,Y):
+	X = preprocessing.scale(X)
+	cutoff = int(len(X)*.7)
+	x_train, y_train = X[:cutoff], Y[:cutoff]
+	x_test,y_test = X[(cutoff+1):], Y[(cutoff+1):]
+	regr = linear_model.LinearRegression()
+	regr.fit(x_train,y_train)
+	print("Residual sum of squares: %.5f"
+      % np.mean((regr.predict(x_test) - y_test) ** 2))
+	pred = regr.predict(x_test)
+	
+
+	# Explained variance score: 1 is perfect prediction
+	print('Variance score: %.8f' % regr.score(x_test, y_test))
+	print('R^2 score: %.8f' % r2_score(y_test, pred))
+	print('explained variance score: %.8f' %explained_variance_score(y_test,pred))
+
+	return
+
+def svm(X,Y):
+    cutoff = int(len(X)*.7)
+    x_train,y_train = X[:cutoff], Y[:cutoff]
+    x_test, y_test = X[(cutoff+1):],Y[(cutoff+1):]
+
+    clf = SVR(kernel='rbf',C=1e6,degree=4)
+    
+    clf.fit(x_train,y_train)
+    pred = clf.predict(x_test)
+    print("Residual sum of squares: %.5f"
+      % np.mean((clf.predict(x_test) - y_test) ** 2))
+    pred = clf.predict(x_test)
+
+    # Explained variance score: 1 is perfect prediction
+    print('R^2 score: %.8f' % r2_score(y_test, pred))
+    print('explained variance score: %.8f' %explained_variance_score(y_test,pred))
+    return
+
+
+def boosting(X,Y):
 	Z = np.arange(0,len(X[0]))
 	cutoff = int(len(X)*.7)
 	x_train, y_train = X[:cutoff], Y[:cutoff]
 	x_test, y_test = X[(cutoff+1):], Y[(cutoff+1):]
 
-	params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 1,
+	params = {'n_estimators': 1000, 'max_depth': 5, 'min_samples_split': 1,
           'learning_rate': 0.01, 'loss': 'ls'}
 	clf = ensemble.GradientBoostingRegressor(**params)
 	clf.fit(x_train, y_train)
@@ -73,7 +128,7 @@ def main(args):
 
 
 
-
 if __name__ == "__main__":
 	main(sys.argv[1:])
+
 

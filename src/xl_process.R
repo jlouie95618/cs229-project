@@ -1,7 +1,7 @@
 library(MASS)
 library(XLConnect)
 
-path <- "/Users/awells/Desktop/Senior_Year/SPRING_QUARTER/cs229/final_project/cs229-project/data/hrr_level_data/"
+path <- "/Users/awells/Desktop/Senior_Year/SPRING_QUARTER/cs229/final_project/cs229-project/data/old_data_designation/hrr_level_data/"
 hrr_filenames <- c("post_discharge_events_hrr_11.xls","PC_HRR_rates_2011.xls","pa_reimb_hrr_2011.xls","DAP_hrr_data_2011.xls","2011_phys_hrr.xls")
 all_files <- list()
 
@@ -42,7 +42,7 @@ parse_pc<-function(worksheets){
 }
 
 parse_reimb <- function(worksheets){
-  cols <- c(6)
+  cols <- c(1,6)
   r_df <- data.frame(worksheets)
   r_df <- r_df[,cols]
   return(r_df)
@@ -58,7 +58,7 @@ parse_phys<-function(worksheets){
 }
 
 
-for(f in 1:length(hrr_filenames)){
+for(t in 1:length(hrr_filenames)){
   f_tot <- paste(path,hrr_filenames[f],sep = '')
   wb <- loadWorkbook(f_tot)
   worksheets <- readWorksheet(wb,sheet = getSheets(wb))
@@ -76,14 +76,18 @@ for(f in 1:length(hrr_filenames)){
 }
 total_df <- cbind(p_df,pc_df,pd_df)
 
-wb_out <- loadWorkbook("hrr_data_total.xls",create = TRUE)
-createSheet(wb_out,"hrr_dat")
-writeWorksheet(wb_out,total_df,"hrr_dat")
-saveWorkbook(wb_out)
+#wb_out <- loadWorkbook("hrr_data_total.xls",create = TRUE)
+#createSheet(wb_out,"hrr_dat")
+#writeWorksheet(wb_out,total_df,"hrr_dat")
+#saveWorkbook(wb_out)
 
-wb_labels <- loadWorkbook('hrr_data_labels.xls',create =TRUE)
-createSheet(wb_labels,'hrr_labels')
-writeWorksheet(wb_labels,r_df,'hrr_labels')
+reimb <- loadWorkbook("/Users/awells/Desktop/Senior_Year/SPRING_QUARTER/cs229/final_project/cs229-project/data/old_data_designation/hrr_level_data/pa_reimb_hrr_2011.xls")
+df <- readWorksheet(reimb,sheet = getSheets(wb))
+df_out <- parse_reimb(df)
+
+wb_labels <- loadWorkbook('demographic_labels.xls',create =TRUE)
+createSheet(wb_labels,'dem_labels')
+writeWorksheet(wb_labels,df_out,'dem_labels')
 saveWorkbook(wb_labels)
 
 
