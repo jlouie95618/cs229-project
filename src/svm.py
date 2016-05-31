@@ -12,14 +12,21 @@ def main(args):
         exit(0)
     X = np.genfromtxt(args[0], delimiter = ',')
     Y = np.genfromtxt(args[1], delimiter = ',')
+<<<<<<< HEAD
     #Y = util.parse_Y(args[1])
+=======
+>>>>>>> f305f3670034f7642831f33b52268aed91fa9201
     X = util.fill_mean(X)
     X = preprocessing.scale(X)
     cutoff = int(len(X)*.7)
     x_train,y_train = X[:cutoff], Y[:cutoff]
     x_test, y_test = X[(cutoff+1):],Y[(cutoff+1):]
 
+<<<<<<< HEAD
     clf = SVR(kernel='rbf',C=1e2,degree=3)
+=======
+    clf = SVR(kernel='rbf',C=1e4,degree=3)
+>>>>>>> f305f3670034f7642831f33b52268aed91fa9201
     
     clf.fit(x_train,y_train)
     pred = clf.predict(x_test)
@@ -28,7 +35,11 @@ def main(args):
     pred = clf.predict(x_test)
 
     # Explained variance score: 1 is perfect prediction
+<<<<<<< HEAD
     print('R^2 score: %.8f' % r2_score(y_test, pred))
+=======
+    print("R^2 score: %.8f" % r2_score(y_test,pred))
+>>>>>>> f305f3670034f7642831f33b52268aed91fa9201
     print('explained variance score: %.8f' %explained_variance_score(y_test,pred))
     return
 

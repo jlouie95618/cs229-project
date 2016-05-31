@@ -38,7 +38,7 @@ import numpy as np
 # Output: 
 # Three files: training_set.csv, labels.csv, hospital_ids.csv
 
-path_to_files = '../data/'
+path_to_files = '../data/2015_data/'
 
 def read_data_file(filename, rows_skip, cols, dataset_map=None, measure_ids=None):
     if dataset_map == None:
@@ -68,13 +68,13 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
             if m_id in hospital:
                 val = hospital[m_id]
                 if m_id == 'EDV':
-                    if '60,000' in val: # Very High
+                    if 'Very High' in val: # Very High
                         val = '70000'
-                    elif '40,000' in val: # High
+                    elif 'High' in val: # High
                         val = '50000'
-                    elif '20,000' in val: # Medium
+                    elif 'Medium' in val: # Medium
                         val = '30000'
-                    elif '19,999' in val: # Low
+                    elif 'Low' in val: # Low
                         val = '10000'
                 elif m_id == 'OP_12' or \
                     m_id == 'OP_17' or \
@@ -87,11 +87,14 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
                     m_id == 'SM_PART_GEN_SURG' or \
                     m_id == 'SM_PART_NURSE' or \
                     m_id == 'SM_SS_CHECK' or \
-                    m_id == 'ACS_REGISTRY':
+                    m_id == 'ACS_REGISTRY' or \
+                    m_id == 'SM_PART_STROKE':
                     if val == 'Y':
                         val = '1'
                     else:
                         val = '0'
+                if val == '-':
+                    val = '-1'
                 if 'Not Available' in val:
                     val = '-1'
             else:
@@ -102,6 +105,11 @@ def assemble_matrix(dataset_map, e_ids, m_ids):
 def main(args):
     print args
     if len(args) < 1: return
+    if len(args) >= 2: 
+        if '2015' in args[1]: 
+            path_to_files = '../data/2015_data/'
+        if '2014' in args[1]: 
+            path_to_files = '../data/2014_data/'
     threshold = float(args[0])
     y_labels = read_data_file(path_to_files + 'Medicare Hospital Spending per Patient - Hospital.csv', 1, (0, 10))
     y_labels = y_labels[y_labels[:,0].argsort()]
@@ -116,14 +124,22 @@ def main(args):
     print y_labels
     print training_example_ids
     
-    read_data_file(path_to_files + 'Complications - Hospital.csv', 1, (0, 9, 12), dataset_map, measure_ids)
+    
     read_data_file(path_to_files + 'Structural Measures - Hospital.csv', 1, (0, 9, 10), dataset_map, measure_ids)
     read_data_file(path_to_files + 'Timely and Effective Care - Hospital.csv', 1, (0, 9, 11), dataset_map, measure_ids)
     read_data_file(path_to_files + 'Healthcare Associated Infections - Hospital.csv', 1, (0, 9, 11), dataset_map, measure_ids)
     read_data_file(path_to_files + 'Outpatient Imaging Efficiency - Hospital.csv', 1, (0, 8, 10), dataset_map, measure_ids)
-    read_data_file(path_to_files + 'Readmissions and Deaths - Hospital.csv', 1, (0, 9, 12), dataset_map, measure_ids)
     read_data_file(path_to_files + 'READMISSION REDUCTION.csv', 1, (1, 3, 6), dataset_map, measure_ids)
+    if '2014' in path_to_files:
+        read_data_file(path_to_files + 'Readmissions Complications and Deaths - Hospital.csv', 1, (0, 9, 12), dataset_map, measure_ids)
+    elif '2015' in path_to_files:
+        read_data_file(path_to_files + 'Complications - Hospital.csv', 1, (0, 9, 12), dataset_map, measure_ids)
+        read_data_file(path_to_files + 'Readmissions and Deaths - Hospital.csv', 1, (0, 9, 12), dataset_map, measure_ids)
 
+    if len(args) == 3 and 'combined' in args[2]: 
+        measure_ids_2014 = set(read_data_file('./2014/feature_labels_2014.csv', 0, (0,)))
+        measure_ids_2015 = set(read_data_file('./2015/feature_labels_2015.csv', 0, (0,)))
+        measure_ids = measure_ids_2015.union(measure_ids_2014)
     measure_ids = sorted(list(measure_ids))
     print measure_ids
     print len(measure_ids)
@@ -144,15 +160,17 @@ def main(args):
     training_example_ids = np.delete(training_example_ids, rows_to_delete, 0)
     print 'after: %d' % len(y_labels)
     # save all data to the appropriate files
-    np.savetxt('training_set.txt', X, fmt='%s', delimiter=';')
-    np.savetxt('feature_labels.txt', measure_ids, fmt='%s', delimiter=';')
-    np.savetxt('hospital_ids.txt', training_example_ids, fmt='%s', delimiter=';')
-    np.savetxt('labels.txt', y_labels, fmt='%s', delimiter=';')
+    tag = ''
+    if len(args) >= 2: tag = str(args[1])
+    np.savetxt('training_set' + tag + '.txt', X, fmt='%s', delimiter=';')
+    np.savetxt('feature_labels' + tag + '.txt', measure_ids, fmt='%s', delimiter=';')
+    np.savetxt('hospital_ids' + tag + '.txt', training_example_ids, fmt='%s', delimiter=';')
+    np.savetxt('labels' + tag + '.txt', y_labels, fmt='%s', delimiter=';')
 
-    np.savetxt('training_set.csv', X, fmt='%s', delimiter=',')
-    np.savetxt('feature_labels.csv', measure_ids, fmt='%s', delimiter=',')
-    np.savetxt('hospital_ids.csv', training_example_ids, fmt='%s', delimiter=',')
-    np.savetxt('labels.csv', y_labels, fmt='%s', delimiter=',')
+    np.savetxt('training_set' + tag + '.csv', X, fmt='%s', delimiter=',')
+    np.savetxt('feature_labels' + tag + '.csv', measure_ids, fmt='%s', delimiter=',')
+    np.savetxt('hospital_ids' + tag + '.csv', training_example_ids, fmt='%s', delimiter=',')
+    np.savetxt('labels' + tag + '.csv', y_labels, fmt='%s', delimiter=',')
 
 if __name__ == '__main__':
     main(sys.argv[1:])

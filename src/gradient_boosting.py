@@ -14,8 +14,8 @@ def main(args):
 	if(len(args)<2):
 		print("USAGE: python gradient_boosting.py [training features] [training labels]")
 	X = np.genfromtxt(args[0], delimiter=',')
-	#Y = np.genfromtxt(args[1], delimiter=',')
-	Y = util.parse_Y(args[1])
+	Y = np.genfromtxt(args[1], delimiter=',')
+	#Y = util.parse_Y(args[1])
 	X = util.process_X(X)
 	X = util.fill_mean(X)
 	X = preprocessing.normalize(X)
@@ -24,7 +24,7 @@ def main(args):
 	x_train, y_train = X[:cutoff], Y[:cutoff]
 	x_test, y_test = X[(cutoff+1):], Y[(cutoff+1):]
 
-	params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 1,
+	params = {'n_estimators': 1000, 'max_depth': 4, 'min_samples_split': 1,
           'learning_rate': 0.01, 'loss': 'ls'}
 	clf = ensemble.GradientBoostingRegressor(**params)
 	clf.fit(x_train, y_train)
@@ -76,4 +76,3 @@ def main(args):
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
-
