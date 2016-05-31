@@ -3,6 +3,7 @@ import numpy as np
 import math
 from scipy.stats import pearsonr
 from copy import deepcopy
+from sklearn.feature_selection import VarianceThreshold
 
 
 def parse_Y(Y_f):
@@ -31,7 +32,7 @@ def process_X(X):
     Use only for 'old' dataset
     '''
     X_new = np.delete(X,0,1)
-    X_new = np.delete(X_new,0,1)
+    #X_new = np.delete(X_new,0,1)
     return X_new 
 
 
@@ -112,8 +113,39 @@ def item_item_collab_filtering(examples, num_nearest_neighbors, sentinel_val, na
 
 
 
+def variance_threshold(X, threshold_val=None):
+    sel = VarianceThreshold()
+    if threshold_val != None: 
+        sel = VarianceThreshold(threshold_val)
+    return sel.fit_transform(X)
 
 
+def fill_mean2(features):
+    '''
+    Input: features is a 2-D numpy feature array
+    Return: 2-D numpy array with sentinel_val replaced with feature means
+
+    Replaces the sentinel_val values with the mean of feature
+    Allows us to fill in missing data
+    '''
+    averages = np.empty((0))
+    for i,feature in enumerate(features.T):
+        observed = np.asarray([f for f in feature if np.isnan(f)==False])
+        if(len(observed)==0):
+            averages = np.append(averages,0)
+            continue
+        mean = np.mean(observed)
+        averages = np.append(averages,mean)
+
+    
+    for j,feature in enumerate(features):
+        for k,f in enumerate(feature):
+            if np.isnan(f):
+                feature[k] = averages[k]
+
+    #np.savetxt('temp.csv',features,fmt='%f',delimiter=',')
+    print(features)
+    return features
 
 
 

@@ -14,12 +14,15 @@ def main(args):
         print("USAGE: python linear_regression.py [feature matrix] [values]")
         exit(0)
     X = np.genfromtxt(args[0], delimiter=',')
-    Y = np.genfromtxt(args[1], delimiter=',')
+    Y = np.genfromtxt(args[1], delimiter=',')  
+    X = util.process_X(X)
     # X = util.item_item_collab_filtering(X, 100, -1)
-    X = util.fill_mean(X, -1)
+    if('dap' in args[0]):
+        X = util.fill_mean2(X)
+    else:
+        X = util.fill_mean(X,-1)
     print X
-    X = feature_selection.variance_threshold(X, 1)
-    X = preprocessing.normalize(X)
+    X = util.variance_threshold(X, 1)
     kfolds = False
     if len(args) >= 3: 
         kfolds = True
