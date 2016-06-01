@@ -13,14 +13,17 @@ count <- 0
 for(path in paths){
   wb <- loadWorkbook(path)
   worksheets <- readWorksheet(wb,sheet = getSheets(wb))
-  
+  d <- length(data[,1])
   data <- data.frame(worksheets)
   names <- data.frame(data[1,])
-  data <- data.frame(data[-c(1,2),])
+  data <- data.frame(data[-c(1,2,d),])
+  lab <- data.frame(data[,c(11)])
   data <- data.frame(data[,-c(1,2,4,5,6,7,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,38,40)])
   names <- data.frame(names[,-c(1,2,4,5,6,7,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,38,40)])
   #lab <- data.frame(data$Table.5..The.Medical.Care.Cost.Equation..Disaggregation.of.payments.for.physician.visits.per.decedent.into.contributions.of.volume..physician.visits.per.decedent..and.price..average.payments.per.physician.visit..during.the.last.two.years.of.life..deaths.occurring.in.2012.)
-  lab <- data.frame(data[,c(5)])
+  #lab <- data.frame(data[,c(2)])
+  #print(colnames(data))
+  #lab <- data.frame(lab[-c(d),])
   data <- data.frame(data[,-c(5)])
   colnames(data) <- sprintf("col%s",seq(1:40))
   if(count == 0){
@@ -33,15 +36,15 @@ for(path in paths){
   count <- count + 1
 }
 
-#wb_out <- loadWorkbook('dap_hd.xls',create =TRUE)
-#createSheet(wb_out,'dap_hd')
-#writeWorksheet(wb_out,data_total,'dap_hd')
-#saveWorkbook(wb_out)
+wb_out <- loadWorkbook('dap_hd_new.xls',create =TRUE)
+createSheet(wb_out,'dap_hd')
+writeWorksheet(wb_out,data_total,'dap_hd')
+saveWorkbook(wb_out)
 
-#wb_out2 <- loadWorkbook('dap_hd_labels.xls',create =TRUE)
-#createSheet(wb_out2,'dap_hd_labels')
-#writeWorksheet(wb_out2,labels,'dap_hd_labels')
-#saveWorkbook(wb_out2)
+wb_out2 <- loadWorkbook('dap_hd_new_labels2.xls',create =TRUE)
+createSheet(wb_out2,'dap_hd_trim_labels')
+writeWorksheet(wb_out2,labels,'dap_hd_trim_labels')
+saveWorkbook(wb_out2)
 
 #wb_out3 <- loadWorkbook('dap_features.xls',create =TRUE)
 #createSheet(wb_out3,'dap_hd_features')
