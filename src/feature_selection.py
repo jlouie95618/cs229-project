@@ -23,10 +23,14 @@ def main(args):
 
 	X = util.process_X(X)
 	X = util.fill_mean2(X)
-	X = preprocessing.normalize(X)
+	#X = preprocessing.normalize(X)
+	
 	#lvsc = LogisticRegression(C=0.1,dual=False).fit(X,y)
 	#model = SelectFromModel(lvsc,prefit=True)
 	#X_new = model.transform(X)
+
+	out_file = open('new_model.txt','w+')
+	for r in X_new[0,:]
 
 	#linear_regression(X_new,y)
 	#svm(X_new,y)
@@ -39,7 +43,7 @@ def main(args):
 
 def linear_regression(X,Y):
 	X = preprocessing.scale(X)
-	cutoff = int(len(X)*.6)
+	cutoff = int(len(X)*.7)
 	x_train, y_train = X[:cutoff], Y[:cutoff]
 	x_test,y_test = X[(cutoff+1):], Y[(cutoff+1):]
 	regr = linear_model.LinearRegression()
@@ -62,7 +66,7 @@ def svm(X,Y):
 	x_train,y_train = X[:cutoff], Y[:cutoff]
 	x_test, y_test = X[(cutoff+1):],Y[(cutoff+1):]
 
-	clf = SVR(kernel='rbf',C=1e2,degree=4)
+	clf = SVR(kernel='rbf',C=1e5,degree=5)
 
 	clf.fit(x_train,y_train)
 	pred = clf.predict(x_test)
@@ -82,7 +86,7 @@ def boosting(X,Y):
 	x_train, y_train = X[:cutoff], Y[:cutoff]
 	x_test, y_test = X[(cutoff+1):], Y[(cutoff+1):]
 
-	params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 1,
+	params = {'n_estimators': 1200, 'max_depth': 6, 'min_samples_split': 1,
           'learning_rate': 0.01, 'loss': 'ls'}
 	clf = ensemble.GradientBoostingRegressor(**params)
 	clf.fit(x_train, y_train)

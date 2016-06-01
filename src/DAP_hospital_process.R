@@ -13,10 +13,10 @@ count <- 0
 for(path in paths){
   wb <- loadWorkbook(path)
   worksheets <- readWorksheet(wb,sheet = getSheets(wb))
-  d <- length(data[,1])
+  #d <- length(data[,1])
   data <- data.frame(worksheets)
   names <- data.frame(data[1,])
-  data <- data.frame(data[-c(1,2,d),])
+  data <- data.frame(data[-c(1,2),])
   lab <- data.frame(data[,c(11)])
   data <- data.frame(data[,-c(1,2,4,5,6,7,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,38,40)])
   names <- data.frame(names[,-c(1,2,4,5,6,7,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,38,40)])
@@ -36,12 +36,12 @@ for(path in paths){
   count <- count + 1
 }
 
-wb_out <- loadWorkbook('dap_hd_new.xls',create =TRUE)
+wb_out <- loadWorkbook('dap_hd_new3.xls',create =TRUE)
 createSheet(wb_out,'dap_hd')
 writeWorksheet(wb_out,data_total,'dap_hd')
 saveWorkbook(wb_out)
 
-wb_out2 <- loadWorkbook('dap_hd_new_labels2.xls',create =TRUE)
+wb_out2 <- loadWorkbook('dap_hd_new_labels3.xls',create =TRUE)
 createSheet(wb_out2,'dap_hd_trim_labels')
 writeWorksheet(wb_out2,labels,'dap_hd_trim_labels')
 saveWorkbook(wb_out2)
