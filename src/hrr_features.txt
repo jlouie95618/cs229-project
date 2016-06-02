@@ -1,0 +1,89 @@
+Resident Population
+Total Physicians per 100,000 Residents
+Primary Care Physicians per 100,000 Residents
+Total Specialists per 100,000 Residents
+Medical Specialists per 100,000 Residents	
+Hospital-Based Physicians per 100,000 Residents
+Surgeons per 100,000 Residents
+Resident Physicians per 100,000 Residents	
+Allergists/ Immunologists per 100,000 Residents
+Anesthesiologists per 100,000 Residents
+Cardiologists per 100,000 Residents
+Cardiovascular/ Thoracic Surgeons per 100,000 Residents
+Critical Care Physicians per 100,000 Residents
+Dermatologists per 100,000 Residents
+Emergency Medicine Physicians per 100,000 Residents
+Endocrinologists per 100,000 Residents
+Family Practice Physicians per 100,000 Residents
+Geriatricians per 100,000 Residents
+General Surgeons per 100,000 Residents 
+Gastroenterologists per 100,000 Residents
+Hematologists/ Oncologists per 100,000 Residents
+Infectious Disease Specialists per 100,000 Residents
+Internal Medicine Physicians per 100,000 Residents
+Neonatologists per 100,000 Residents	
+Nephrologists per 100,000 Residents
+Neurosurgeons per 100,000 Residents	
+Neurologists per 100,000 Residents 
+Obstetrician/ Gynecologists per 100,000 Women Age 15-44
+Ophthalmologists per 100,000 Residents 
+Orthopedic Surgeons per 100,000 Residents 
+Otolaryngologists per 100,000 Residents
+Pathologists per 100,000 Residents
+Pediatricians per 100,000 Residents
+Plastic & Reconstructive Surgeons per 100,000 Residents
+Psychiatrists per 100,000 Residents
+Pulmonologists per 100,000 Residents
+Radiologists per 100,000 Residents
+Radiation Oncologists per 100,000 Residents
+Physical Medicine/ Rehabilitation Physicians per 100,000 Residents
+Rheumatologists per 100,000 Residents
+Urologists per 100,000 Residents	
+Vascular Surgeons per 100,000 Residents
+Number of eligible medicare beneficiaries eligible
+Percent of Medicare enrollees having at least one ambulatory visit to a primary care clinician
+Number of diabetic Medicare enrollees
+Percent of diabetic Medicare enrollees age 65-75 having hemoglobin A1c test
+Percent of diabetic Medicare enrollees age 65-75 having eye examination
+Percent of diabetic Medicare enrollees age 65-75 having blood lipids (LDL-C) test
+Number of female Medicare enrollees age 67-69
+Percent of female Medicare enrollees age 67-69 having at least one mammogram over a two-year period
+Number of Medicare beneficiaries (Part A eligible)
+Discharges for ambulatory care sensitive conditions per 1,000 Medicare enrollees
+Number of patients in medical cohort
+Percent seeing a primary care clinician within 14 days of discharge to home (medical)
+Percent having an ambulatory visit within 14 days of discharge to home (medical)
+Percent having an emergency room visit within 30 days of discharge (medical)
+Number of patients in surgical cohort
+Percent readmitted within 30 days of discharge (surgical)
+Percent seeing a primary care clinician within 14 days of discharge to home (surgical)
+Percent having an emergency room visit within 30 days of discharge (surgical)
+Number of patients in CHF cohort
+Percent readmitted within 30 days of discharge (CHF)
+Percent seeing a primary care clinician within 14 days of discharge to home (CHF)
+Percent having an ambulatory visit within 14 days of discharge to home (CHF)
+Percent having an emergency room visit within 30 days of discharge (CHF)
+Number of patients in CHF cohort
+Percent readmitted within 30 days of discharge (AMI)
+Percent seeing a primary care clinician within 14 days of discharge to home (AMI)
+Percent having an ambulatory visit within 14 days of discharge to home (AMI)
+Percent having an emergency room visit within 30 days of discharge (AMI)
+Number of patients in CHF cohort
+Percent readmitted within 30 days of discharge (PNEU)
+Percent seeing a primary care clinician within 14 days of discharge to home (PNEU)
+Percent having an ambulatory visit within 14 days of discharge to home (PNEU)
+Percent having an emergency room visit within 30 days of discharge (PNEU)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

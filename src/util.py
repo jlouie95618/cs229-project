@@ -144,7 +144,7 @@ def fill_mean2(features):
                 feature[k] = averages[k]
 
     #np.savetxt('temp.csv',features,fmt='%f',delimiter=',')
-    print(features)
+    #print(features)
     return features
 
 

@@ -24,7 +24,7 @@ def main(args):
 	x_train, y_train = X[:cutoff], Y[:cutoff]
 	x_test, y_test = X[(cutoff+1):], Y[(cutoff+1):]
 
-	params = {'n_estimators': 1000, 'max_depth': 4, 'min_samples_split': 1,
+	params = {'n_estimators': 1000, 'max_depth': 5, 'min_samples_split': 1,
           'learning_rate': 0.01, 'loss': 'ls'}
 	clf = ensemble.GradientBoostingRegressor(**params)
 	clf.fit(x_train, y_train)
